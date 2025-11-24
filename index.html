@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOCA - Form Evento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7f5 0%, #e8ebe8 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            background: #e0e0e0;
+            height: 6px;
+            width: 100%;
+        }
+        
+        .progress-fill {
+            background: #4a7c2c;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .form-content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            color: #2d5016;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8ebe8;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .required {
+            color: #4a7c2c;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4a7c2c;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .radio-option:hover {
+            border-color: #4a7c2c;
+            background: #f9fdf9;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+        
+        .slider-container {
+            padding: 20px 0;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #4a7c2c;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #4a7c2c;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .slider-value {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #4a7c2c;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(45, 80, 22, 0.3);
+        }
+        
+        .explanation-section {
+            background: #f9fdf9;
+            padding: 40px 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .explanation-title {
+            font-size: 24px;
+            color: #2d5016;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .explanation-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4a7c2c;
+        }
+        
+        .explanation-item h3 {
+            color: #2d5016;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .explanation-item p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .helper-text {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .form-content {
+                padding: 30px 20px;
+            }
+            
+            .explanation-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NOCA</h1>
+            <p>Grazie per aver partecipato al nostro evento</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+        
+        <div class="form-content">
+            <form id="nocaForm">
+                <!-- SEZIONE CONTATTI -->
+                <div class="section">
+                    <div class="section-title">I tuoi contatti</div>
+                    
+                    <div class="form-group">
+                        <label for="nome">Nome e Cognome <span class="required">*</span></label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="helper-text">Useremo questa email per inviarti aggiornamenti esclusivi</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Numero di telefono (opzionale)</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                </div>
+                
+                <!-- DOMANDA 1: SEGMENTAZIONE MASTER -->
+                <div class="section">
+                    <div class="section-title">Conosciamoci meglio</div>
+                    
+                    <div class="form-group">
+                        <label>Quale descrizione ti rappresenta meglio? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="eco_anxious" name="persona" value="eco_anxious" required>
+                                <label for="eco_anxious">Eco-Anxious Millennials - Sono preoccupato per la crisi ambientale e cerco azioni concrete</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="greentech" name="persona" value="greentech">
+                                <label for="greentech">GreenTech Enthusiast - Mi affascina la tecnologia applicata alla sostenibilità</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="foodie" name="persona" value="foodie">
+                                <label for="foodie">Mindful Foodie - Amo il cibo di qualità e la connessione con le sue origini</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="professionista" name="persona" value="professionista">
+                                <label for="professionista">Professionista Etico - Cerco coerenza tra valori personali e scelte professionali</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="wellness" name="persona" value="wellness">
+                                <label for="wellness">Wellness Seeker - Priorità al benessere personale e alle scelte consapevoli</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DOMANDA 2: VALUE ALIGNMENT -->
+                <div class="section">
+                    <div class="form-group">
+                        <label>La tracciabilità del prodotto è importante nelle tue decisioni d'acquisto? <span class="required">*</span></label>
+                        <div class="helper-text">Sapere da dove proviene un prodotto e come è stato realizzato</div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="trace_si" name="tracciabilita" value="si" required>
+                                <label for="trace_si">Sì, è importante per me</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="trace_no" name="tracciabilita" value="no">
+                                <label for="trace_no">No, non è una priorità</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DOMANDA 3: PSYCHOGRAPHIC -->
+                <div class="section">
+                    <div class="form-group">
+                        <label>Quanto tempo dedichi normalmente a goderti un momento per te stesso? <span class="required">*</span></label>
+                        <div class="slider-container">
+                            <div class="slider-labels">
+                                <span>Sempre di corsa</span>
+                                <span>Tempo di qualità</span>
+                            </div>
+                            <input type="range" id="rituale" name="rituale" min="1" max="10" value="5" required>
+                            <div class="slider-value" id="ritualeValue">5</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DOMANDA 4: INTENT -->
+                <div class="section">
+                    <div class="form-group">
+                        <label>Stai attualmente cercando di cambiare le tue abitudini di consumo verso scelte più sostenibili? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="intent_attivo" name="intent" value="attivo" required>
+                                <label for="intent_attivo">Sì, attivamente</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="intent_pensando" name="intent" value="pensando">
+                                <label for="intent_pensando">Ci sto pensando</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="intent_soddisfatto" name="intent" value="soddisfatto">
+                                <label for="intent_soddisfatto">No, sono già soddisfatto delle mie scelte</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="intent_nonprioritario" name="intent" value="nonprioritario">
+                                <label for="intent_nonprioritario">Non è una mia priorità al momento</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DOMANDA 5: ATTRIBUTION -->
+                <div class="section">
+                    <div class="form-group">
+                        <label for="discovery">Come hai scoperto NOCA? <span class="required">*</span></label>
+                        <select id="discovery" name="discovery" required>
+                            <option value="">Seleziona un'opzione</option>
+                            <option value="passaparola">Passaparola</option>
+                            <option value="social">Social media</option>
+                            <option value="ricerca">Ricerca online</option>
+                            <option value="evento">Questo evento</option>
+                            <option value="altro">Altro</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">Scopri il tuo profilo NOCA</button>
+            </form>
+        </div>
+        
+        <!-- SEZIONE SPIEGAZIONI -->
+        <div class="explanation-section">
+            <h2 class="explanation-title">Perché queste domande?</h2>
+            
+            <div class="explanation-item">
+                <h3>📧 Sezione Contatti</h3>
+                <p><strong>Motivazione:</strong> Identità base per personalizzazione e follow-up. L'email è il canale primario di contatto post-evento. Il telefono (opzionale) permette SMS nurture sequences con engagement rate del 98% vs 20% delle email. Viene chiesto dopo l'email per progressive trust building.</p>
+            </div>
+            
+            <div class="explanation-item">
+                <h3>🎯 Domanda 1: "Quale descrizione ti rappresenta meglio?"</h3>
+                <p><strong>Funzione:</strong> Master Segmentation Question</p>
+                <p><strong>Motivazione:</strong> Questa è LA domanda critica. Attiva automaticamente il routing CRM permettendo di inviare email sequence completamente diverse per ogni segmento. Eco-Anxious riceve dati sull'impatto CO2, GreenTech riceve innovation stories, Mindful Foodie riceve ricette e pairing guides. Senza questa domanda invieresti messaggi generici a 5 audience diverse con bassa conversion. Con questa, ogni persona riceve esattamente ciò che le interessa = alta conversion.</p>
+            </div>
+            
+            <div class="explanation-item">
+                <h3>✅ Domanda 2: "La tracciabilità è importante nelle tue decisioni d'acquisto?"</h3>
+                <p><strong>Funzione:</strong> Value Alignment Check</p>
+                <p><strong>Motivazione:</strong> Valida se il core value di NOCA (trasparenza) risuona con il lead. Chi risponde "No" probabilmente compra per prezzo/gusto, non per valori - non è il target ideale e va in nurture soft. Chi risponde "Sì" è un perfect fit con alta probabilità di conversione. È una domanda filtro che identifica immediatamente il cliente ideale senza parlare del prodotto specifico.</p>
+            </div>
+            
+            <div class="explanation-item">
+                <h3>⏰ Domanda 3: "Quanto tempo dedichi a momenti per te stesso?"</h3>
+                <p><strong>Funzione:</strong> Psychographic Profiling</p>
+                <p><strong>Motivazione:</strong> Identifica Wellness Seekers (8-10) vs convenience buyers (1-3). Chi segna alto risponde a messaggi su "pause significative", "momenti di presenza", self-care narrative. Chi segna basso preferisce messaggi product-focused su praticità. Permette di differenziare il tone of voice e il tipo di storytelling senza usare termini astratti - tutti capiscono cosa significa "tempo per sé".</p>
+            </div>
+            
+            <div class="explanation-item">
+                <h3>🔄 Domanda 4: "Stai cercando di cambiare le tue abitudini di consumo?"</h3>
+                <p><strong>Funzione:</strong> Intent Detection</p>
+                <p><strong>Motivazione:</strong> Identifica la fase del buyer journey. "Sì, attivamente" = alta propensione al cambiamento, fast-track conversion con follow-up entro 24h. "Ci sto pensando" = consideration phase, nurture con contenuti educativi. "Già soddisfatto" = fedele ad altri brand, servono messaggi di differenziazione. "Non priorità" = nurture soft a lungo termine. Ti dice QUANDO e COME contattarli con impatto diretto sulla priorità di follow-up.</p>
+            </div>
+            
+            <div class="explanation-item">
+                <h3>📍 Domanda 5: "Come hai scoperto NOCA?"</h3>
+                <p><strong>Funzione:</strong> Attribution & Word-of-Mouth Detection</p>
+                <p><strong>Motivazione:</strong> Due benefici: (1) Attribution channel - sai dove sta funzionando il marketing e dove investire; (2) Identifica word-of-mouth generators. Chi risponde "Passaparola" è un influencer informale - candidato per referral program. Chi dice "Social" conferma canale generazionale (Millennial/Gen Z). È marketing intelligence mascherata da domanda semplice.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Progress bar
+        const form = document.getElementById('nocaForm');
+        const progressBar = document.getElementById('progressBar');
+        const inputs = form.querySelectorAll('input[required], select[required]');
+        
+        function updateProgress() {
+            let filled = 0;
+            inputs.forEach(input => {
+                if (input.type === 'radio') {
+                    if (document.querySelector(`input[name="${input.name}"]:checked`)) {
+                        filled++;
+                    }
+                } else if (input.value.trim() !== '') {
+                    filled++;
+                }
+            });
+            
+            const progress = (filled / inputs.length) * 100;
+            progressBar.style.width = progress + '%';
+        }
+        
+        form.addEventListener('input', updateProgress);
+        form.addEventListener('change', updateProgress);
+        
+        // Slider value display
+        const slider = document.getElementById('rituale');
+        const sliderValue = document.getElementById('ritualeValue');
+        
+        slider.addEventListener('input', function() {
+            sliderValue.textContent = this.value;
+        });
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Grazie per aver compilato il form! I tuoi dati sono stati salvati.');
+            // Qui aggiungeresti l'invio effettivo dei dati al backend
+        });
+    </script>
+</body>
+</html>
